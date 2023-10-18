@@ -18,9 +18,9 @@ function App() {
         excludedDates.length
     ) + 1;
   const [LeadCount, setLeadCount] = useState();
-  /* const [DDR, setDDR] = useState();*/
   const DDR = Math.floor(LeadCount / Days);
-  const Time = new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds();
+  const [curTime,sertcurTime] = useState(new Date())
+  const Time = curTime.getHours() + ":" + curTime.getMinutes() + ":" + curTime.getSeconds();
   const firstDate = StartDate.getDate()+`/`+StartDate.getMonth()+`/`+StartDate.getFullYear();
   const lastDate = EndDate.getDate()+`/`+EndDate.getMonth()+`/`+EndDate.getFullYear();
   const newtask = {
@@ -32,8 +32,10 @@ function App() {
     days: Days,
     leadCount: LeadCount,
     ddr: DDR,
+    time:Time
   };
   const addTask = () => {
+    sertcurTime(new Date())
     setTask((prevData)=>{return[...prevData , newtask]})
     console.log(newtask.startDate);
     console.log(newtask.endDate);
@@ -135,16 +137,16 @@ function App() {
               ))}
             </td>
             <td data-heading="No. of Days" id="tbodytd">
-              {tasks.days = -1 ? 0:tasks.days}
+              {tasks.days==-1?0:tasks.days}
             </td>
             <td data-heading="Lead Count" id="tbodytd">
               {tasks.leadCount}
             </td>
             <td data-heading="DDR" id="tbodytd">
-              {tasks.ddr = Infinity ? "invalid data":tasks.ddr }
+              {tasks.ddr==Infinity?"invalid data":tasks.ddr}
             </td>
             <td data-heading="Submittion timing" id="tbodytd">
-              {Time}
+              {tasks.time}
             </td>
           </tr>
         
